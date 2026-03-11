@@ -6,12 +6,12 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    libsqlite3-dev \
+    libpq-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Extensions PHP nécessaires pour Laravel + SQLite
-RUN docker-php-ext-install pdo pdo_sqlite
+# Extensions PHP nécessaires pour Laravel + PostgreSQL
+RUN docker-php-ext-install pdo pdo_pgsql
 
 # Dossier de travail
 WORKDIR /var/www/html
@@ -32,9 +32,5 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 # Port utilisé par Render
 EXPOSE 10000
 
-# 🔥 Créer le fichier SQLite automatiquement et lancer Laravel
-CMD mkdir -p /var/www/html/database && \
-    touch /var/www/html/database/database.sqlite && \
-    chmod 777 /var/www/html/database/database.sqlite && \
-    php artisan migrate --force && \
-    php artisan serve --host=0.0.0.0 --port=$PORT
+# 🔥 Entrypoint : lancer migrations puis serveur Laravel
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
