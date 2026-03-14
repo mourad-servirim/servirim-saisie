@@ -48,6 +48,7 @@ Route::get('/stock/{id}/edit', [StockController::class, 'edit'])->name('stock.ed
 
 // Mettre à jour le stock
 Route::put('/stock/{id}', [StockController::class, 'update'])->name('stock.update');
+Route::delete('/stock/{id}', [StockController::class, 'destroy'])->name('stock.destroy');
 
 
 
@@ -83,3 +84,7 @@ Route::get('/reparations/{id}/print', [ReparationController::class, 'print'])
     ->name('reparations.print');
 Route::get('/pointage/{id}/print', [PointageController::class, 'print'])
     ->name('pointage.print');
+
+
+Route::resource('reparations', ReparationController::class);
+

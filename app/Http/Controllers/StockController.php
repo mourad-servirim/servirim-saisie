@@ -58,7 +58,21 @@ class StockController extends Controller
         $stock->update($request->all());
 
         return redirect()->route('stock.index')->with('success', 'Article mis à jour avec succès !');
+
     }
+
+          // Supprimer un article
+public function destroy($id)
+{
+    $stock = StockItem::findOrFail($id);
+    $stock->delete();
+
+    return redirect()->route('stock.index')
+        ->with('success', 'Article supprimé avec succès !');
+}
+
+
+
               public function printAll()
 {
     $stocks = StockItem::all();

@@ -1,40 +1,72 @@
-@csrf
+<div class="grid grid-cols-2 gap-4">
 
-<div class="space-y-4">
+<!-- ITEM -->
+<div>
+<label class="block text-sm font-medium text-gray-700">Item</label>
+<input
+type="text"
+name="item"
+value="{{ old('item', $stock->item ?? '') }}"
+class="border p-2 rounded w-full"
+required>
+</div>
 
-    <div>
-        <label class="block font-semibold text-gray-600 mb-1">ITEM</label>
-        <input type="text" name="item" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
-    </div>
+<!-- DESIGNATION -->
+<div>
+<label class="block text-sm font-medium text-gray-700">Désignation</label>
+<input
+type="text"
+name="designation"
+value="{{ old('designation', $stock->designation ?? '') }}"
+class="border p-2 rounded w-full"
+required>
+</div>
 
-    <div>
-        <label class="block font-semibold text-gray-600 mb-1">Désignation</label>
-        <input type="text" name="designation" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
-    </div>
+<!-- CODE -->
+<div>
+<label class="block text-sm font-medium text-gray-700">Code</label>
+<input
+type="text"
+name="code"
+value="{{ old('code', $stock->code ?? '') }}"
+class="border p-2 rounded w-full">
+</div>
 
-    <div>
-        <label class="block font-semibold text-gray-600 mb-1">Code</label>
-        <input type="text" name="code" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400">
-    </div>
+<!-- QUANTITE RETIREE -->
+<div>
+<label class="block text-sm font-medium text-gray-700">Quantité retirée</label>
+<input
+type="number"
+name="qte_retiree"
+value="{{ old('qte_retiree', $stock->qte_retiree ?? 0) }}"
+class="border p-2 rounded w-full"
+min="0">
+</div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-            <label class="block font-semibold text-gray-600 mb-1">Quantité retirée</label>
-            <input type="number" name="qte_retiree" min="0" 
-            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
-        </div>
+<!-- QUANTITE RESTANTE -->
+<div>
+<label class="block text-sm font-medium text-gray-700">Quantité restante</label>
+<input
+type="number"
+name="qte_restante"
+value="{{ old('qte_restante', $stock->qte_restante ?? 0) }}"
+class="border p-2 rounded w-full"
+min="0">
+</div>
 
-        <div>
-            <label class="block font-semibold text-gray-600 mb-1">Quantité restante</label>
-            <input type="number" name="qte_restante" min="0"
-            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400" required>
-        </div>
-    </div>
+</div>
 
-    <div class="flex justify-center mt-6">
-        <button type="submit" 
-            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 shadow">
-            {{ $buttonText }}
-        </button>
-    </div>
+<br>
+
+<!-- BOUTON -->
+<div class="flex justify-center">
+
+<button
+type="submit"
+class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 shadow">
+
+{{ $buttonText ?? 'Enregistrer' }}
+
+</button>
+
 </div>
