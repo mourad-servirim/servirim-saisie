@@ -70,6 +70,15 @@ class PointageController extends Controller
 
     return $pdf->download('pointage_'.$pointage->technicien.'_'.$pointage->date_pointage.'.pdf');
 }
+public function printAll()
+{
+    $pointages = Pointage::latest()->get();
+
+    $pdf = Pdf::loadView('pointage.pdf_all', compact('pointages'))
+              ->setPaper('A4', 'portrait');
+
+    return $pdf->stream('liste-pointages.pdf');
+}
 
 
 }

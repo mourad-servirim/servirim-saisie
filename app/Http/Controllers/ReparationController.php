@@ -70,5 +70,27 @@ class ReparationController extends Controller
     return $pdf->stream('reparation-'.$reparation->id.'.pdf');
 }
 
+public function printAll()
+{
+    $reparations = Reparation::latest()->get();
+
+    $company = [
+        'nom' => 'SERVIRIM',
+        'capital' => '1.000.000 MRO',
+        'nif' => '10724265',
+        'rc' => '77471',
+        'cnss_employeur' => '11092',
+        'adresse' => 'Rue Sidi Mohamed Ould Cheikh Abdallahi, K, Ext S3 n° 0069D, Nouakchott',
+        'telephone' => '+222 45 24 53 84',
+        'email' => 'contact@servirim.com',
+        'site' => 'www.servirim.com',
+        'compte_bancaire' => '0209120005GBM',
+    ];
+
+    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('reparations.pdf_all', compact('reparations','company'));
+    return $pdf->stream('liste-reparations.pdf');
+}
+
+
 
 }

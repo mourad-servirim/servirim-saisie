@@ -86,5 +86,13 @@ Route::get('/pointage/{id}/print', [PointageController::class, 'print'])
     ->name('pointage.print');
 
 
+Route::get('/reparations/print/all', [ReparationController::class, 'printAll'])
+    ->name('reparations.printAll');
+
+Route::get('/reparations/{id}/print', [ReparationController::class, 'print'])
+    ->name('reparations.print');
+
 Route::resource('reparations', ReparationController::class);
 
+Route::get('/pointage/print/all', [PointageController::class, 'printAll'])
+     ->name('pointage.printAll');
