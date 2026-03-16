@@ -81,5 +81,45 @@ public function printAll()
 }
 
 
+public function storeMultiple(Request $request)
+{
+
+    $date = $request->date_pointage;
+    $heure = $request->heure_pointage;
+
+    foreach($request->techniciens as $index => $technicien){
+
+        Pointage::create([
+            'technicien' => $technicien,
+            'tache' => 'Montage',
+            'date_pointage' => $date,
+            'heure_pointage' => $heure,
+            'present' => $request->present[$index] ?? 0,
+            'nb_pneus_repares' => $request->nb_pneus_repares[$index] ?? 0,
+            'observation' => $request->observation[$index] ?? null,
+        ]);
+
+    }
+
+    return redirect()->route('pointage.index')
+    ->with('success','Fiche de présence enregistrée avec succès');
+
+
+
+}
+
+public function deleteAll()
+{
+    Pointage::truncate();
+
+    return redirect()->route('pointage.index')
+    ->with('success','Tous les pointages ont été supprimés');
+}
+
+
+
+
+
+
 }
 

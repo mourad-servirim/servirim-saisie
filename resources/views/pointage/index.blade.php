@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Liste des pointages')
+@section('title', '📋 Fiche de présence mensuelle')
 
 @section('content')
 <div class="flex justify-center py-10 bg-gray-50 min-h-screen">
@@ -19,6 +19,23 @@
    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center">
    <i class="bx bx-printer mr-2"></i> 🖨️ Imprimer toute la liste
 </a>
+
+ <form action="{{ route('pointage.deleteAll') }}" method="POST"
+onsubmit="return confirm('Supprimer toute la liste des pointages ?')">
+@csrf
+@method('DELETE')
+
+<button type="submit"
+class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 flex items-center ml-2">
+<i class="bx bx-trash mr-2"></i>
+🗑 Supprimer toute la liste
+</button>
+
+</form>
+
+
+
+
 
         </div>
 

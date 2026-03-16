@@ -96,3 +96,8 @@ Route::resource('reparations', ReparationController::class);
 
 Route::get('/pointage/print/all', [PointageController::class, 'printAll'])
      ->name('pointage.printAll');
+
+     Route::post('/pointage/store-multiple',[PointageController::class,'storeMultiple'])->name('pointage.storeMultiple');
+
+      Route::delete('/pointage/delete-all', [PointageController::class, 'deleteAll'])
+->name('pointage.deleteAll');
