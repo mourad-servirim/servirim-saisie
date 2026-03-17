@@ -15,10 +15,16 @@
                class="bg-blue-600 text-white px-5 py-2.5 rounded-lg shadow hover:bg-blue-700 transition flex items-center">
                 <i class="bx bx-plus mr-1 text-lg"></i> Nouveau pointage
             </a>
-                  <a href="{{ route('pointage.printAll') }}"
-   class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center">
-   <i class="bx bx-printer mr-2"></i> 🖨️ Imprimer toute la liste
+                 
+
+<a href="{{ route('pointage.ficheMensuelle') }}"
+class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 flex items-center ml-2">
+<i class="bx bx-table mr-2"></i>
+📋 Fiche mensuelle
 </a>
+
+
+
 
  <form action="{{ route('pointage.deleteAll') }}" method="POST"
 onsubmit="return confirm('Supprimer toute la liste des pointages ?')">

@@ -116,6 +116,40 @@ public function deleteAll()
     ->with('success','Tous les pointages ont été supprimés');
 }
 
+public function ficheMensuelle(Request $request)
+{
+    $mois = $request->mois ?? date('m');
+    $annee = $request->annee ?? date('Y');
+
+    $pointages = Pointage::whereMonth('date_pointage', $mois)
+        ->whereYear('date_pointage', $annee)
+        ->get();
+
+    // Grouper par technicien
+    $techniciens = $pointages->groupBy('technicien');
+
+    return view('pointage.fiche_mensuelle', compact('techniciens', 'mois', 'annee'));
+}
+
+
+public function printFicheMensuelle(Request $request)
+{
+    $mois = $request->mois ?? date('m');
+    $annee = $request->annee ?? date('Y');
+
+    $pointages = Pointage::whereMonth('date_pointage', $mois)
+        ->whereYear('date_pointage', $annee)
+        ->get();
+
+    $techniciens = $pointages->groupBy('technicien');
+
+    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView(
+        'pointage.fiche_mensuelle_pdf',
+        compact('techniciens', 'mois', 'annee')
+    )->setPaper('A4', 'landscape'); // ⚠️ paysage important
+
+    return $pdf->stream('fiche-mensuelle.pdf');
+}
 
 
 

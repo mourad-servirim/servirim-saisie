@@ -69,6 +69,15 @@ Route::resource('reparations', ReparationController::class);
 
 use App\Http\Controllers\BulletinController;
 
+
+// ✅ PRIORITÉ MAX (mettre ici en premier)
+Route::get('/pointage/fiche-mensuelle', [PointageController::class, 'ficheMensuelle'])
+    ->name('pointage.ficheMensuelle');
+
+Route::get('/pointage/fiche-mensuelle/print', [PointageController::class, 'printFicheMensuelle'])
+    ->name('pointage.printFicheMensuelle');
+
+    
 Route::get('/bulletins/create', [BulletinController::class, 'create'])
     ->name('bulletins.create');
 
@@ -101,3 +110,5 @@ Route::get('/pointage/print/all', [PointageController::class, 'printAll'])
 
       Route::delete('/pointage/delete-all', [PointageController::class, 'deleteAll'])
 ->name('pointage.deleteAll');
+
+
