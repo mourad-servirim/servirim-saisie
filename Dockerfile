@@ -33,4 +33,7 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 EXPOSE 10000
 
 # 🔥 Entrypoint : lancer migrations puis serveur Laravel
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+CMD php artisan config:clear && \
+    php artisan key:generate && \
+    php artisan migrate --force || true && \
+    php artisan serve --host=0.0.0.0 --port=${PORT:-10000}
